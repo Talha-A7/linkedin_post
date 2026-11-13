@@ -5,6 +5,10 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // Plain apostrophes and quotes in page copy are fine.
+  { rules: { "react/no-unescaped-entities": "off" } },
+  // Playwright fixtures call a parameter named \`use\`, which the React hooks rule mistakes for React's use().
+  { files: ["e2e/**/*.ts"], rules: { "react-hooks/rules-of-hooks": "off" } },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

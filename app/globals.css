@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --surface-2: #f0efeb;
+  --text: #16191d;
+  --muted: #5b6370;
+  --border: #e3e1dc;
+  --brand: #0b63c4;
+  --brand-ink: #ffffff;
+  --brand-soft: #e7f0fb;
+  --good: #12805c;
+  --warn: #b25e09;
+  --bad: #c0362c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #0f1113;
+    --surface: #181b1f;
+    --surface-2: #20242a;
+    --text: #ecedee;
+    --muted: #a2a9b3;
+    --border: #2c3138;
+    --brand: #6cb2ff;
+    --brand-ink: #0b1a2c;
+    --brand-soft: #182739;
+    --good: #4fd1a1;
+    --warn: #f0a44b;
+    --bad: #ff7a70;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  /* Long URLs or hashtags in AI output wrap instead of pushing the page sideways. */
+  overflow-wrap: anywhere;
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+@utility card {
+  @apply rounded-2xl border border-border bg-surface p-5 sm:p-6;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-brand-ink hover:opacity-90;
+}
+@utility btn-ghost {
+  @apply btn border border-border bg-surface text-text hover:bg-surface-2;
+}
+@utility input {
+  @apply w-full rounded-xl border border-border bg-surface px-3.5 py-2.5 text-sm text-text placeholder:text-muted focus:border-brand focus:outline-none;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold;
 }
